@@ -1,6 +1,6 @@
 import requests
 
-STACK_EXCHANGE_API_KEY = "rl_TPBX3oErzauxLkrTi1H4DpAt9E"
+STACK_EXCHANGE_API_KEY = "os.getenv()"
 
 QUESTIONS_API = "https://api.stackexchange.com/2.3/questions"
 ANSWERS_API = "https://api.stackexchange.com/2.3/questions/{ids}/answers"
@@ -14,7 +14,7 @@ def fetch_questions(tag: str, limit: int = 5):
             "tagged": tag,
             "site": "stackoverflow",
             "pagesize": limit,
-            "key": "rl_TPBX3oErzauxLkrTi1H4DpAt9",
+        
         }
 
         response = requests.get(QUESTIONS_API, params=params, timeout=10)
@@ -41,7 +41,7 @@ def fetch_answers(question_id: int):
             "sort": "votes",
             "site": "stackoverflow",
             "filter": "withbody",
-            "key": "rl_TPBX3oErzauxLkrTi1H4DpAt9",
+            
         }
 
         url = ANSWERS_API.format(ids=question_id)
