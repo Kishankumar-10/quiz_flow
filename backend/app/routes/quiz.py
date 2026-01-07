@@ -1,47 +1,21 @@
 from fastapi import APIRouter, Query
 from app.services.stackexchange import fetch_questions
-from app.services.mcq_builder import build_mcq
-from app.services.cache import get_cached, set_cache
+from app.services.mock_data import get_mock_questions
 
 router = APIRouter(prefix="/quiz", tags=["Quiz"])
 
 
 @router.get("/")
 def get_quiz(
-    tag: str = Query(default="android"),
-    limit: int = Query(default=10, le=20),
+    tag: str = Query(default="flutter"),
+    limit: int = Query(default=5, ge=3, le=15),
 ):
-    try:
-        cached = get_cached(tag)
-        if cached:
-            return {
-                "tag": tag,
-                "cached": True,
-                "count": len(cached),
-                "questions": cached,
-            }
+    questions = get_mock_questions(tag, limit)
 
-        raw_questions = fetch_questions(tag=tag, limit=limit)
+    return {
+        "tag": tag,
+        "mode": "mock",
+        "count": len(questions),
+        "questions": questions,
+    }
 
-        mcqs = []
-        for q in raw_questions:
-            mcq = build_mcq(q)
-            if mcq:
-                mcqs.append(mcq)
-
-        if mcqs:
-            set_cache(tag, mcqs)
-
-        return {
-            "tag": tag,
-            "cached": False,
-            "count": len(mcqs),
-            "questions": mcqs,
-        }
-
-    except Exception as e:
-        # THIS ensures FastAPI never returns 500
-        return {
-            "error": "QUIZ_GENERATION_FAILED",
-            "message": str(e),
-        }

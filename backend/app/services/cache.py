@@ -30,3 +30,5 @@ def set_cache(tag: str, data):
         "timestamp": time.time(),
         "data": data,
     }
+def clear_cache():
+    _CACHE.clear()
