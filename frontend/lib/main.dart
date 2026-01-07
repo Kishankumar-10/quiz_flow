@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/onboarding_screen.dart';
-
+import 'package:frontend/screens/splashscreen.dart';
 
 void main() {
   runApp(const QuizFlowApp());
@@ -29,10 +28,7 @@ class QuizFlowApp extends StatelessWidget {
           ),
         ),
       ),
-      home: OnboardingScreen(),
+      home: const SplashScreen(),
     );
   }
 }
-
-
-
