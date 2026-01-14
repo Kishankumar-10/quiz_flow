@@ -1,32 +1,32 @@
-# QuizFlow
+# QuizFlow 🚀
 
 QuizFlow is a cross‑platform learning app that delivers focused, session‑based practice using modern Flutter UI and a FastAPI backend. It fetches real programming questions from Stack Overflow and generates high‑quality multiple‑choice quizzes with one correct answer and three plausible distractors. The experience is calm, premium, and optimized for mobile and desktop targets.
 
-## Key Features
-- Real questions sourced from Stack Overflow
-- AI‑generated distractors; correct option comes from accepted answers
-- Strict validation and safe fallbacks (never crashes)
-- Three focus modes: Practice, Interview, Quick Test
-- Clean Material 3 design: splash, onboarding, setup, quiz
-- Lightweight caching to avoid repeated processing
-- Rewards: XP and streak tracking (client side)
+## Key Features ✨
+- ✅ Real questions sourced from Stack Overflow
+- 🧠 AI‑generated distractors; correct option from accepted answers
+- 🔒 Strict validation with safe fallbacks (never crashes)
+- 🎯 Focus modes: Practice, Interview, Quick Test
+- 🎨 Clean Material 3 design: splash, onboarding, setup, quiz
+- ⚡ Lightweight caching to avoid repeated processing
+- 🏆 Rewards: XP and streak tracking (client side)
 
-## Tech Stack
-- Frontend: Flutter (Material 3), http, shared_preferences
-- Backend: FastAPI, Uvicorn, Pydantic, Requests, BeautifulSoup
-- Data Source: Stack Exchange API (Stack Overflow)
-- Caching: In‑memory TTL cache on backend
+## Tech Stack 🛠️
+- 📱 Frontend: Flutter (Material 3), http, shared_preferences
+- 🔧 Backend: FastAPI, Uvicorn, Pydantic, Requests, BeautifulSoup
+- 🌐 Data Source: Stack Exchange API (Stack Overflow)
+- 🗃️ Caching: In‑memory TTL cache on backend
 
-## Architecture Overview
-- Flutter client calls the backend endpoint `/quiz?tag=<language>&limit=<count>` to retrieve questions.
-- Backend:
-  - Fetches questions from Stack Overflow (tagged by language).
-  - Extracts the accepted answer as the correct answer.
-  - Generates three AI‑like distractors and validates output (4 options, non‑empty, single correct).
-  - Falls back to Q&A mode when generation or validation fails (never crashes).
-  - Caches results per question key `quiz:{tag}:{question_id}`.
+## Architecture Overview 🧩
+- 📲 Flutter client calls the backend endpoint `/quiz?tag=<language>&limit=<count>` to retrieve questions.
+- 🧭 Backend:
+  - 📥 Fetches questions from Stack Overflow (tagged by language).
+  - ✅ Extracts the accepted answer as the correct answer.
+  - 🧪 Generates three AI‑like distractors and validates output (4 options, non‑empty, single correct).
+  - 🛡️ Falls back to Q&A mode when generation or validation fails (never crashes).
+  - 🗂️ Caches results per question key `quiz:{tag}:{question_id}`.
 
-## Repository Structure
+## Repository Structure 📁
 - `frontend/` Flutter application (lib/screens, assets, platform folders)
 - `backend/` FastAPI application
   - `app/main.py` FastAPI app entry
@@ -38,7 +38,7 @@ QuizFlow is a cross‑platform learning app that delivers focused, session‑bas
   - `app/services/cache.py` In‑memory TTL cache
   - `app/utils/text_cleaner.py` HTML→text cleanup
 
-## Backend Setup
+## Backend Setup ⚙️
 1. Prerequisites:
    - Python 3.10+
    - Recommended: virtualenv
@@ -71,7 +71,7 @@ QuizFlow is a cross‑platform learning app that delivers focused, session‑bas
      }
      ```
 
-## Frontend Setup
+## Frontend Setup 📦
 1. Prerequisites:
    - Flutter SDK (3.7+)
 2. Install dependencies:
@@ -94,7 +94,7 @@ QuizFlow is a cross‑platform learning app that delivers focused, session‑bas
    flutter run
    ```
 
-## Usage
+## Usage ▶️
 1. Start backend (port 8000).
 2. Launch frontend app.
 3. Flow:
@@ -102,21 +102,28 @@ QuizFlow is a cross‑platform learning app that delivers focused, session‑bas
    - Choose language, focus mode, and question count (3–15)
    - Start practice and answer MCQs; immediate feedback shows green for correct and red for incorrect
 
-## Screenshots
-Below are representative screens. Filenames follow numeric order for clarity.
+## Screenshots 🖼️
+Below are representative screens. Displayed side‑by‑side for quick scanning; sized for GitHub readability.
 
-- Onboarding 01  
-  ![Onboarding 01](./screenshots/onboarding_screen01.png)
-- Onboarding 02  
-  ![Onboarding 02](./screenshots/onboarding_screen02.png)
-- Onboarding 03  
-  ![Onboarding 03](./screenshots/onboarding_screen03.png)
-- Home / Setup 04  
-  ![Home Screen 04](./screenshots/home_screen04.png)
-- Quiz 05  
-  ![Quiz Screen 05](./screenshots/quiz_screen05.png)
+<div align="center">
+  <img src="./screenshots/onboarding_screen01.png" alt="Onboarding 01" width="420" />
+  <img src="./screenshots/onboarding_screen02.png" alt="Onboarding 02" width="420" />
+</div>
 
-## Validation and Reliability
+<br />
+
+<div align="center">
+  <img src="./screenshots/onboarding_screen03.png" alt="Onboarding 03" width="420" />
+  <img src="./screenshots/home_screen04.png" alt="Home / Setup 04" width="420" />
+</div>
+
+<br />
+
+<div align="center">
+  <img src="./screenshots/quiz_screen05.png" alt="Quiz Screen 05" width="420" />
+</div>
+
+## Validation and Reliability ✅
 - AI output is validated server‑side:
   - Exactly 4 options
   - One correct index in bounds
@@ -125,10 +132,10 @@ Below are representative screens. Filenames follow numeric order for clarity.
 - If validation fails, backend returns a safe Q&A entry (single correct answer), ensuring the app never crashes.
 - Caching avoids repeat processing of the same question.
 
-## Contributing
+## Contributing 🤝
 - Keep changes minimal and aligned with the established architecture.
 - Avoid introducing secrets into code or logs.
 - Prefer small, focused PRs and preserve response contracts consumed by the Flutter app.
 
-## License
+## License 📄
 This project is provided for educational and demonstration purposes. License terms can be added here if you plan to distribute or publish.
