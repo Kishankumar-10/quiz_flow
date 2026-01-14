@@ -9,16 +9,19 @@ ANSWERS_API = "https://api.stackexchange.com/2.3/questions/{ids}/answers"
 def fetch_questions(tag: str, limit: int = 5):
     try:
         params = {
-            "order": "desc",
-            "sort": "activity",
-            "tagged": tag,
             "site": "stackoverflow",
-            "pagesize": limit,
+        "tagged": tag,
+        "is_answered": "true",
+        "sort": "votes",
+        "order": "desc",
+        "pagesize": limit * 3,   # overfetch
+        "filter": "!9_bDDxJY5",
         
         }
 
         response = requests.get(QUESTIONS_API, params=params, timeout=10)
         response.raise_for_status()
+        return response.json().get("items", [])
 
         data = response.json()
 

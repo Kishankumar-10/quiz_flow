@@ -57,7 +57,7 @@ class _QuizScreenState extends State<QuizScreen> {
     );
 
     if (isQuickTestMode) {
-      return questions.where((q) => q.question.length < 120).toList();
+      return questions.where((q) => q.question.length <= 120).toList();
     }
 
     return questions;
@@ -84,7 +84,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   // ===== OPTION SELECTION =====
   void onOptionSelected(int index) {
-    if (answerSubmitted && !isInterviewMode) return;
+    if (answerSubmitted) return;
 
     setState(() {
       selectedOption = index;
@@ -126,14 +126,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   // ===== OPTIONS LOGIC =====
   List<String> _optionsToShow(QuizQuestion question) {
-    if (!isInterviewMode) return question.options;
-
-    final correctOption = question.options[question.correctIndex];
-
-    final otherOptions =
-        question.options.where((o) => o != correctOption).toList()..shuffle();
-
-    return [correctOption, ...otherOptions.take(2)]..shuffle();
+    return question.options;
   }
 
   // ===== OPTION COLOR =====
@@ -150,13 +143,11 @@ class _QuizScreenState extends State<QuizScreen> {
 
     final correctAnswer = question.options[question.correctIndex];
 
-    if (isPracticeMode || (isInterviewMode && reviewMode)) {
-      if (optionsToShow[index] == correctAnswer) {
-        return Colors.green.withOpacity(0.2);
-      }
-      if (selectedOption == index && optionsToShow[index] != correctAnswer) {
-        return Colors.red.withOpacity(0.2);
-      }
+    if (optionsToShow[index] == correctAnswer) {
+      return Colors.green.withOpacity(0.2);
+    }
+    if (selectedOption == index && optionsToShow[index] != correctAnswer) {
+      return Colors.red.withOpacity(0.2);
     }
 
     return Colors.transparent;
@@ -348,12 +339,6 @@ class _QuizScreenState extends State<QuizScreen> {
                         selectedOption == null
                             ? null
                             : () {
-                              if (isInterviewMode && !reviewMode) {
-                                setState(() {
-                                  reviewMode = true;
-                                });
-                                return;
-                              }
                               goToNextQuestion();
                             },
                     child: const Text('Next'),
