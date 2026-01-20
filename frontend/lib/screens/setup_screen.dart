@@ -38,20 +38,28 @@ class _SetupScreenState extends State<SetupScreen> {
   void _onQuestionCountChanged(String value) {
     if (value.isEmpty) return;
 
-    final int parsed = int.tryParse(value) ?? 5;
-    int clampedValue = parsed;
-    if (parsed < 3) clampedValue = 3;
-    if (parsed > 15) clampedValue = 15;
+    final int? parsed = int.tryParse(value);
+    if (parsed == null) return;
 
-    // Only update text if value was clamped to avoid cursor jumping on every keystroke
-    // But we always update the state variable
-    if (clampedValue != parsed) {
-      _questionController.text = clampedValue.toString();
+    questionCount = parsed;
+  }
+
+  void _applyQuestionCountValidation() {
+    final rawText = _questionController.text.trim();
+    final int? parsed = int.tryParse(rawText);
+
+    int value = parsed ?? questionCount;
+    if (value < 3) value = 3;
+    if (value > 15) value = 15;
+
+    if (_questionController.text != value.toString()) {
+      _questionController.text = value.toString();
       _questionController.selection = TextSelection.fromPosition(
         TextPosition(offset: _questionController.text.length),
       );
     }
-    questionCount = clampedValue;
+
+    questionCount = value;
   }
 
   @override
@@ -266,6 +274,7 @@ class _SetupScreenState extends State<SetupScreen> {
                     controller: _questionController,
                     keyboardType: TextInputType.number,
                     onChanged: _onQuestionCountChanged,
+                    onEditingComplete: _applyQuestionCountValidation,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -311,6 +320,7 @@ class _SetupScreenState extends State<SetupScreen> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
+              _applyQuestionCountValidation();
               Navigator.push(
                 context,
                 MaterialPageRoute(

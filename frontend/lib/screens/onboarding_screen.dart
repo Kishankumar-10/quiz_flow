@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/onboarding_prefs.dart';
 import 'setup_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -194,7 +195,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              // Mark onboarding as completed before moving on.
+                              await OnboardingPrefs.setOnboardingCompleted();
+
+                              if (!mounted) return;
+
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                   builder: (_) => const SetupScreen(),

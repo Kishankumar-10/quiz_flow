@@ -56,10 +56,7 @@ class _QuizScreenState extends State<QuizScreen> {
       limit: widget.questionCount,
     );
 
-    if (isQuickTestMode) {
-      return questions.where((q) => q.question.length <= 120).toList();
-    }
-
+    // Quick Test uses the same question list so the requested count is preserved.
     return questions;
   }
 
@@ -84,7 +81,8 @@ class _QuizScreenState extends State<QuizScreen> {
 
   // ===== OPTION SELECTION =====
   void onOptionSelected(int index) {
-    if (answerSubmitted) return;
+    // Allow changing the selection; only navigation/scoring locks the answer.
+    final bool shouldAutoAdvanceQuickTest = isQuickTestMode && !answerSubmitted;
 
     setState(() {
       selectedOption = index;
@@ -92,7 +90,7 @@ class _QuizScreenState extends State<QuizScreen> {
       reviewMode = false;
     });
 
-    if (isQuickTestMode) {
+    if (isQuickTestMode && shouldAutoAdvanceQuickTest) {
       Future.delayed(const Duration(milliseconds: 400), () {
         goToNextQuestion();
       });

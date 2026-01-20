@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../services/onboarding_prefs.dart';
 import 'onboarding_screen.dart';
+import 'setup_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -13,10 +15,17 @@ class SplashScreen extends StatelessWidget {
           tween: Tween(begin: 0, end: 1),
           duration: const Duration(milliseconds: 2000),
           curve: Curves.easeOut,
-          onEnd: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) => const OnboardingScreen()),
-            );
+          onEnd: () async {
+            // Decide where to go after splash based on onboarding completion.
+            final completed = await OnboardingPrefs.isOnboardingCompleted();
+            final nextScreen =
+                completed ? const SetupScreen() : const OnboardingScreen();
+
+            if (!context.mounted) return;
+
+            Navigator.of(
+              context,
+            ).pushReplacement(MaterialPageRoute(builder: (_) => nextScreen));
           },
           builder: (context, value, child) {
             return Opacity(

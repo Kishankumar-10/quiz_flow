@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/quiz_question.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.2.2:8000';
+  static const String baseUrl = 'https://quiz-flow-vxs8.onrender.com';
 
   static Future<List<QuizQuestion>> fetchQuiz({
     required String tag,
@@ -20,8 +20,6 @@ class ApiService {
     final data = json.decode(response.body);
     final List questions = data['questions'];
 
-    return questions
-        .map((q) => QuizQuestion.fromJson(q))
-        .toList();
+    return questions.map((q) => QuizQuestion.fromJson(q)).toList();
   }
 }
