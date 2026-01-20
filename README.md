@@ -42,41 +42,36 @@ QuizFlow addresses the need for structured, distraction-free technical skill pra
 
 ## 🖼️ Screenshots
 
-### 1. Onboarding - Welcome
-![Onboarding Welcome](screenshots/onboarding_screen01.png)
-*Initial welcome screen for new users.*
+### Onboarding
+<p align="center">
+  <img src="screenshots/onboarding_screen01.png" width="45%" />
+  <img src="screenshots/onboarding_screen02.png" width="45%" />
+</p>
+<p align="center">
+  <img src="screenshots/onboarding_screen03.png" width="45%" />
+</p>
+*Initial welcome screen, focus mode explanation, and final onboarding step.*
 
-### 2. Onboarding - Focus Modes
-![Onboarding Focus Modes](screenshots/onboarding_screen02.png)
-*Explanation of available practice modes.*
+### Practice Mode
+<p align="center">
+  <img src="screenshots/practice_mode04.png" width="45%" />
+  <img src="screenshots/practice_live_question05.png" width="45%" />
+</p>
+*Home screen with Practice mode selected and active quiz question.*
 
-### 3. Onboarding - Get Started
-![Onboarding Get Started](screenshots/onboarding_screen03.png)
-*Final onboarding step before entering the app.*
+### Interview Mode
+<p align="center">
+  <img src="screenshots/interview_mode06.png" width="45%" />
+  <img src="screenshots/interview_live_quiz_question07.png" width="45%" />
+</p>
+*Home screen with Interview mode selected and active quiz question.*
 
-### 4. Practice Mode Setup
-![Practice Mode Setup](screenshots/practice_mode04.png)
-*Home screen with Practice mode selected.*
-
-### 5. Practice Mode Question
-![Practice Mode Question](screenshots/practice_live_question05.png)
-*Active quiz question in Practice mode.*
-
-### 6. Interview Mode Setup
-![Interview Mode Setup](screenshots/interview_mode06.png)
-*Home screen with Interview mode selected.*
-
-### 7. Interview Mode Question
-![Interview Mode Question](screenshots/interview_live_quiz_question07.png)
-*Active quiz question in Interview mode.*
-
-### 8. Quick Test Setup
-![Quick Test Setup](screenshots/quick_test08.png)
-*Home screen with Quick Test mode selected.*
-
-### 9. Quick Test Question
-![Quick Test Question](screenshots/quick_test_live_questions09.png)
-*Active quiz question in Quick Test mode.*
+### Quick Test
+<p align="center">
+  <img src="screenshots/quick_test08.png" width="45%" />
+  <img src="screenshots/quick_test_live_questions09.png" width="45%" />
+</p>
+*Home screen with Quick Test mode selected and active quiz question.*
 
 ## ⚙️ Setup & Installation
 
